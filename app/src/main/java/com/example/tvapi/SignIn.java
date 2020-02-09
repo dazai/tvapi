@@ -37,19 +37,19 @@ public class SignIn extends AppCompatActivity {
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
-                    Toast.makeText(SignIn.this, "User logged in ", Toast.LENGTH_SHORT).show();
-                    Intent I = new Intent(SignIn.this, UserActivity.class);
-                    startActivity(I);
+                    Toast.makeText(getApplicationContext(), "User logged in ", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getApplicationContext(), UserActivity.class);
+                    startActivity(intent);
                 } else {
-                    Toast.makeText(SignIn.this, "Login to continue", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Login to continue", Toast.LENGTH_SHORT).show();
                 }
             }
         };
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent I = new Intent(SignIn.this, MainActivity.class);
-                startActivity(I);
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
             }
         });
         btnLogIn.setOnClickListener(new View.OnClickListener() {
@@ -64,20 +64,20 @@ public class SignIn extends AppCompatActivity {
                     logInpasswd.setError("Enter Password!");
                     logInpasswd.requestFocus();
                 } else if (userEmail.isEmpty() && userPaswd.isEmpty()) {
-                    Toast.makeText(SignIn.this, "Fields Empty!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Fields Empty!", Toast.LENGTH_SHORT).show();
                 } else if (!(userEmail.isEmpty() && userPaswd.isEmpty())) {
                     firebaseAuth.signInWithEmailAndPassword(userEmail, userPaswd).addOnCompleteListener(SignIn.this, new OnCompleteListener() {
                         @Override
                         public void onComplete(@NonNull Task task) {
                             if (!task.isSuccessful()) {
-                                Toast.makeText(SignIn.this, "Not sucessfull", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), "Not sucessfull", Toast.LENGTH_SHORT).show();
                             } else {
-                                startActivity(new Intent(SignIn.this, UserActivity.class));
+                                startActivity(new Intent(getApplicationContext(), UserActivity.class));
                             }
                         }
                     });
                 } else {
-                    Toast.makeText(SignIn.this, "Error", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
                 }
             }
         });

@@ -1,9 +1,9 @@
 package com.example.tvapi;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -12,7 +12,6 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import retrofit2.Call;
@@ -25,8 +24,7 @@ public class UserActivity extends AppCompatActivity {
     Button btnLogOut;
     TextView welcome;
     ListView movies;
-    //FirebaseAuth firebaseAuth;
-    //private FirebaseAuth.AuthStateListener authStateListener;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,11 +40,12 @@ public class UserActivity extends AppCompatActivity {
         ResApi api = retrofit.create(ResApi.class);
         Call<Resultat> call = api.getMovies();
         call.enqueue(new Callback<Resultat>() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onResponse(Call<Resultat> call, Response<Resultat> response) {
                 final Resultat resultat = response.body();
-                welcome.setText("Welcome, displaying "+resultat.getPage()+" of "+resultat.getTotalPages()
-                +"\n Showing "+resultat.getResults().size()+" of "+resultat.getTotalResultats());
+                welcome.setText("Welcome, displaying "+resultat.getPage()+" of "+resultat.getTotalPages()+" page."
+                        +"\n Showing "+resultat.getResults().size()+" of "+resultat.getTotalResultats()+" result.");
                 final String[] names = new String[resultat.getResults().size()];
                 for(int i = 0; i < resultat.getResults().size(); i++){
                     names[i] = resultat.getResults().get(i).getName();
@@ -90,8 +89,8 @@ public class UserActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 FirebaseAuth.getInstance().signOut();
-                Intent I = new Intent(UserActivity.this, SignIn.class);
-                startActivity(I);
+                Intent intent = new Intent(getApplicationContext(), SignIn.class);
+                startActivity(intent);
 
             }
         });

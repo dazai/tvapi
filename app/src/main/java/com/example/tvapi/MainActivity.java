@@ -14,7 +14,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
-    public EditText emailId, passwd;
+    EditText emailId, passwd;
     Button btnSignUp;
     TextView signIn;
     FirebaseAuth firebaseAuth;
@@ -28,6 +28,12 @@ public class MainActivity extends AppCompatActivity {
         passwd = findViewById(R.id.ETpassword);
         btnSignUp = findViewById(R.id.btnSignUp);
         signIn = findViewById(R.id.TVSignIn);
+
+    }
+
+    protected void onStart(){
+        super.onStart();
+
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -39,19 +45,17 @@ public class MainActivity extends AppCompatActivity {
                 } else if (paswd.isEmpty()) {
                     passwd.setError("Set your password");
                     passwd.requestFocus();
-                } /*else if (emailID.isEmpty() && paswd.isEmpty()) {
-                    Toast.makeText(MainActivity.this, "Fields Empty!", Toast.LENGTH_SHORT).show();
-                }*/ else {
+                } else {
                     firebaseAuth.createUserWithEmailAndPassword(emailID, paswd).addOnCompleteListener(MainActivity.this, new OnCompleteListener() {
                         @Override
                         public void onComplete(@NonNull Task task) {
 
                             if (!task.isSuccessful()) {
-                                Toast.makeText(MainActivity.this.getApplicationContext(),
+                                Toast.makeText(getApplicationContext(),
                                         "UserActivity unsuccessful: " + task.getException().getMessage(),
                                         Toast.LENGTH_SHORT).show();
                             } else {
-                                startActivity(new Intent(MainActivity.this, UserActivity.class));
+                                startActivity(new Intent(getApplicationContext(), UserActivity.class));
                             }
                         }
                     });
@@ -61,9 +65,11 @@ public class MainActivity extends AppCompatActivity {
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent I = new Intent(MainActivity.this, SignIn.class);
-                startActivity(I);
+                Intent intent = new Intent(getApplicationContext(), SignIn.class);
+                startActivity(intent);
             }
         });
+
     }
+
 }
