@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "685126884756",
+    "firebase_url": "https://tvapi-20a1b.firebaseio.com",
+    "project_id": "tvapi-20a1b",
+    "storage_bucket": "tvapi-20a1b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:685126884756:android:d0e5e576f52c4c3f398381",
+        "android_client_info": {
+          "package_name": "com.example.tvapi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "685126884756-llhph8lba0irrj2p94cqn9jb2vhc19k8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-Uuu9W8NgO_cl3bPQ3-xpib7EPafAjN0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "685126884756-llhph8lba0irrj2p94cqn9jb2vhc19k8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
