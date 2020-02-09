@@ -44,8 +44,8 @@ public class UserActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<Resultat> call, Response<Resultat> response) {
                 final Resultat resultat = response.body();
-                welcome.setText("Welcome, displaying "+resultat.getPage()+" of "+resultat.getTotalPages()+" page."
-                        +"\n Showing "+resultat.getResults().size()+" of "+resultat.getTotalResultats()+" result.");
+                welcome.setText("Welcome, displaying "+resultat.getPage()+" of "+resultat.getTotalPages()+" pages."
+                        +"\n Showing "+resultat.getResults().size()+" of "+resultat.getTotalResultats()+" results.");
                 final String[] names = new String[resultat.getResults().size()];
                 for(int i = 0; i < resultat.getResults().size(); i++){
                     names[i] = resultat.getResults().get(i).getName();
@@ -69,7 +69,6 @@ public class UserActivity extends AppCompatActivity {
                 movies.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        Toast.makeText(getApplicationContext(), names[position], Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(getApplicationContext(), Detail.class);
                         intent.putExtra("id", resultat.getResults().get(position).getId());
                         intent.putExtra("poster_path", resultat.getResults().get(position).getPosterPath());

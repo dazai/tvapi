@@ -53,7 +53,7 @@ public class Detail extends AppCompatActivity {
             Response<Det> response = call.execute();
             Det details = response.body();
             showName.append("Show name : "+details.getName()+".\n");
-            showName.append("Overview : "+details.getOverview());
+            showName.append("Overview : "+details.getOverview()+".\n");
             showName.append("Genres : ");
             List<Genre> genres = details.getGenres();
             for(int i = 0; i < genres.size()-1; i++){
@@ -68,7 +68,13 @@ public class Detail extends AppCompatActivity {
                 showName.append(producers.get(i).getName()+", ");
             }
             showName.append(producers.get(producers.size()-1).getName()+".\n");
-            showName.append("Status : "+details.isInProduction());
+            if(details.isInProduction()){
+                showName.append("Status : In production.");
+            }
+            else{
+                showName.append("Status : Finished.");
+            }
+
         } catch (IOException e) {
             Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
         }
